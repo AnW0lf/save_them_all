@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 63fcbcf5d2f89a14087b473ed62b34cc
+guid: 0ca84ce8b3cd05f4f9c35aef0723a8a6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Running
+    second: Running1
   externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Running
+      name: Running1
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 42
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -63,7 +63,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -75,7 +75,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    fileIdsGeneration: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -334,18 +334,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Stickman_heads_sphere@Running(Clone)
+    - name: Stickman_heads_sphere@Running1(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Stickman_heads_sphere
-      parentName: Stickman_heads_sphere@Running(Clone)
+      parentName: Stickman_heads_sphere@Running1(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Skelet.c
-      parentName: Stickman_heads_sphere@Running(Clone)
+      parentName: Stickman_heads_sphere@Running1(Clone)
       position: {x: -0.04505834, y: -0.094428115, z: 0.09329273}
       rotation: {x: 0.00034687287, y: 0.7387328, z: 0.67264456, w: 0.042697243}
       scale: {x: 1, y: 1, z: 1}
@@ -511,7 +511,7 @@ ModelImporter:
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 1
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
