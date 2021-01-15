@@ -4,19 +4,8 @@ using UnityEngine;
 
 public class Points : MonoBehaviour
 {
-    [SerializeField] private Color _sphereColor = Color.cyan;
     [SerializeField] private GameObject _minionPrefab = null;
-    [SerializeField] private Transform[] _points = null;
-
-    private void OnDrawGizmos()
-    {
-        if (_points == null) return;
-        for (int i = 0; i < _points.Length; i++)
-        {
-            Gizmos.color = _sphereColor;
-            Gizmos.DrawSphere(_points[i].position, 0.1f);
-        }
-    }
+    [SerializeField] private Point[] _points = null;
 
     public void InstantiateMinions(int count)
     {
@@ -24,8 +13,21 @@ public class Points : MonoBehaviour
 
         for(int i = 0; i < count; i++)
         {
-            GameObject minion = Instantiate(_minionPrefab);
-            minion.transform.position = _points[i].position;
+            Minion minion = Instantiate(_minionPrefab).GetComponent<Minion>();
+            minion.transform.position = _points[i].transform.position;
+            _points[i].AttachMinion(minion);
+        }
+    }
+
+    public void AttachMinion(Minion minion)
+    {
+        foreach (var point in _points)
+        {
+            if(point.IsEmpty)
+            {
+                point.AttachMinion(minion);
+                return;
+            }
         }
     }
 }
