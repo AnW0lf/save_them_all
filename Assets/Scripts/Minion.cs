@@ -7,11 +7,6 @@ public class Minion : MonoBehaviour
 {
     [Header("Ragdoll data")]
     [SerializeField] private Animator _animator = null;
-    [SerializeField] private Collider _mainCollider = null;
-    [SerializeField] private Rigidbody _mainRigidbody = null;
-    [SerializeField] private Collider[] _ragdollColliders = null;
-    [SerializeField] private Rigidbody[] _ragdollRigidbodies = null;
-    [SerializeField] private Joint[] _ragdollJoints = null;
 
     public bool IsRagdollActive
     {
@@ -19,36 +14,23 @@ public class Minion : MonoBehaviour
         set
         {
             _animator.enabled = !value;
-            if (IsRagdollActive)
-            {
-                _mainRigidbody.Sleep();
-                _mainCollider.enabled = false;
 
-                foreach (var rigidbody in _ragdollRigidbodies)
-                    rigidbody.WakeUp();
+            foreach (var rigidbody in GetComponentsInChildren<Rigidbody>())
+                rigidbody.isKinematic = _animator.enabled;
+            _agent.enabled = _animator.enabled;
 
-                foreach (var collider in _ragdollColliders)
-                    collider.enabled = true;
+            _renderer.material = IsRagdollActive ? _deathMaterial : _aliveMaterial;
+        }
+    }
 
-                _renderer.material = _deathMaterial;
-
-                _agent.enabled = false;
-            }
-            else
-            {
-                _mainRigidbody.WakeUp();
-                _mainCollider.enabled = true;
-
-                foreach (var rigidbody in _ragdollRigidbodies)
-                    rigidbody.Sleep();
-
-                foreach (var collider in _ragdollColliders)
-                    collider.enabled = false;
-
-                _renderer.material = _aliveMaterial;
-
-                _agent.enabled = true;
-            }
+    private bool _selected = false;
+    public bool Selected
+    {
+        get => _selected;
+        set
+        {
+            _selected = value;
+            _renderer.material = _selected ? _deathMaterial : _aliveMaterial;
         }
     }
 
@@ -66,7 +48,9 @@ public class Minion : MonoBehaviour
     {
         IsRagdollActive = false;
         _agent.Warp(transform.position);
-        transform.eulerAngles = Vector3.zero;
+        _animator.SetFloat("Offset", Random.Range(0f, 1f)) ;
+
+        StartCoroutine(Utils.CrossFading(Vector3.zero, Vector3.zero, 1f, (vector) => transform.eulerAngles = vector, (a, b, c) => Vector3.Lerp(a, b, c)));
     }
 
     private void Update()
@@ -83,5 +67,7 @@ public class Minion : MonoBehaviour
     {
         IsRagdollActive = true;
 
+        foreach (var rb in GetComponentsInChildren<Rigidbody>())
+            rb.AddForce(direction * 100f, ForceMode.Acceleration);
     }
 }

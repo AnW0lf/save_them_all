@@ -7,12 +7,11 @@ public static class Utils
     public static Process GetCrossFade<A>(A from, A to, float duration, Action<A> setter, Func<A, A, float, A> lerp)
     {
         Process process = new Process();
-        IEnumerator crossFading = CrossFading(from, to, duration, setter, lerp, process.Coroutine);
-        process.Enumerator = crossFading;
+        process.Enumerator = CrossFading(from, to, duration, setter, lerp);
         return process;
     }
 
-    public static IEnumerator CrossFading<A>(A from, A to, float duration, Action<A> setter, Func<A, A, float, A> lerp, Coroutine self)
+    public static IEnumerator CrossFading<A>(A from, A to, float duration, Action<A> setter, Func<A, A, float, A> lerp)
     {
         float timer = 0f;
 
@@ -22,8 +21,12 @@ public static class Utils
             setter(lerp(from, to, timer / duration));
             yield return null;
         }
+    }
 
-        self = null;
+    public static IEnumerator DelayedCall(float delay, Action call)
+    {
+        yield return new WaitForSeconds(delay);
+        call.Invoke();
     }
 }
 

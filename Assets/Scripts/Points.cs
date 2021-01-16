@@ -14,7 +14,7 @@ public class Points : MonoBehaviour
         for(int i = 0; i < count; i++)
         {
             Minion minion = Instantiate(_minionPrefab).GetComponent<Minion>();
-            minion.transform.position = _points[i].transform.position;
+            minion.transform.position = _points[i].transform.position + Vector3.back * 0.9f;
             _points[i].AttachMinion(minion);
         }
     }
