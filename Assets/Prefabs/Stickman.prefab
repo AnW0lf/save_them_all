@@ -51,6 +51,7 @@ MonoBehaviour:
   _body: {fileID: 2679697034542397001}
   _agent: {fileID: 5684874076329323486}
   _renderer: {fileID: 7135378718648462191}
+  _untargetMaterial: {fileID: 2100000, guid: 8aaac7a339bde3d448360afbd1120ea0, type: 2}
   _aliveMaterial: {fileID: 2100000, guid: e81cd194bad1d0d4da7d3153de39f3b0, type: 2}
   _deathMaterial: {fileID: 2100000, guid: dbde80cba071d5e47b27629f71c6ea18, type: 2}
 --- !u!95 &7135378718644344239

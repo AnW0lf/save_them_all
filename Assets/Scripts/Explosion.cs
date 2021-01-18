@@ -56,7 +56,6 @@ public class Explosion : Interactive
 
             if (hit.transform.TryGetComponent(out Rigidbody rigidbody))
             {
-                print($"Rigidbody {hit.transform.name}");
                 rigidbody.AddExplosionForce(_explosionForce, transform.position, _range);
             }
         }

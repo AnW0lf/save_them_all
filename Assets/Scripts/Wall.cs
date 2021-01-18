@@ -14,8 +14,6 @@ public class Wall : Interactive
         if (_deactive) return;
         _deactive = true;
 
-        print("Destroy wall");
-
         Transform destroyedWall = Instantiate(_destroyedWallPrefab).transform;
         destroyedWall.position = transform.position;
         destroyedWall.rotation = transform.rotation;

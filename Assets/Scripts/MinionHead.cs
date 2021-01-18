@@ -6,6 +6,8 @@ public class MinionHead : MonoBehaviour
 {
     [SerializeField] private Minion _minion = null;
 
+    public Minion Minion => _minion;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Interactive interactive))
@@ -20,5 +22,7 @@ public class MinionHead : MonoBehaviour
             if (_minion.IsRagdollActive) ;
             else _minion.IsRagdollActive = true;
         }
+
+        Minion.ChectToAddToParty(collision.gameObject);
     }
 }
