@@ -39,7 +39,7 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Vector2 screenDifference = (Vector2)Input.mousePosition - _down;
             _from = Target.transform.position + Vector3.up * 0.5f;
             float horizontalOffset = Mathf.Clamp(-3f * screenDifference.x / Screen.width, -1.2f, 1.2f);
-            float forceOffset = Mathf.Clamp(-3f * screenDifference.y / Screen.height, 0.2f, 1f);
+            float forceOffset = Mathf.Clamp(-3f * screenDifference.y / Screen.height, 0.1f, 1f);
             Vector3 offset = Vector3.RotateTowards(Target.transform.forward, Mathf.Sign(horizontalOffset) * Target.transform.right, Mathf.Abs(horizontalOffset), 0f);
             offset = Vector3.RotateTowards(offset, Vector3.up, 0.6f, 0f);
             offset *= forceOffset;
@@ -86,12 +86,21 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Target.Cast(_direction * 50f);
     }
 
+    Coroutine _changeTimeScale = null;
+
+    private void CrossFadeTimeScale(float timeScale)
+    {
+        if (_changeTimeScale != null) StopCoroutine(_changeTimeScale);
+
+        _changeTimeScale = StartCoroutine(Utils.CrossFading(Time.timeScale, timeScale, 0.5f, (t) => Time.timeScale = t, (a, b, c) => Mathf.Lerp(a, b, c)));
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         _holded = true;
         _line.enabled = true;
 
-        Time.timeScale = 0.1f;
+        CrossFadeTimeScale(0.1f);
 
         _down = Input.mousePosition;
 
@@ -102,7 +111,7 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Time.timeScale = 1f;
+        CrossFadeTimeScale(1f);
 
         UpdatePositions();
 

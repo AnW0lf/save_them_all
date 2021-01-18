@@ -17,7 +17,7 @@ public static class Utils
 
         while (timer <= duration)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             setter(lerp(from, to, timer / duration));
             yield return null;
         }

@@ -5869,7 +5869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _line: {fileID: 46774371}
-  _castVelocity: 15
+  _castVelocity: 20
   _duration: 5
   _step: 0.1
 --- !u!1 &880386455
