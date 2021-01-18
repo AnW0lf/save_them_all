@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private LineRenderer _line = null;
+    [SerializeField] private float _castVelocity = 150f;
+    [SerializeField] private float _duration = 10f;
+    [SerializeField] private float _step = 0.1f;
 
     public Minion Target { get; private set; } = null;
 
@@ -22,9 +25,10 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (_holded)
         {
             UpdatePositions();
+            _direction = (_to - _from) * _castVelocity; 
 
-            Vector3[] positions = { _from, _to };
-            _line.SetPositions(positions);
+            if (Target != null)
+            DrawLine(_from, _direction);
         }
     }
 
@@ -34,12 +38,32 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             Vector2 screenDifference = (Vector2)Input.mousePosition - _down;
             _from = Target.transform.position + Vector3.up * 0.5f;
-            float horizontalOffset = Mathf.Clamp(-3f * screenDifference.x / Screen.width, -1f, 1f);
+            float horizontalOffset = Mathf.Clamp(-3f * screenDifference.x / Screen.width, -1.2f, 1.2f);
             float forceOffset = Mathf.Clamp(-3f * screenDifference.y / Screen.height, 0.2f, 1f);
-            _to = _from
-                + Vector3.RotateTowards(Target.transform.forward, Mathf.Sign(horizontalOffset) * Target.transform.right, Mathf.Abs(horizontalOffset), 0f)
-                + Vector3.RotateTowards(Target.transform.forward, Vector3.up, 0.5f, 0f) * 10f * forceOffset;
+            Vector3 offset = Vector3.RotateTowards(Target.transform.forward, Mathf.Sign(horizontalOffset) * Target.transform.right, Mathf.Abs(horizontalOffset), 0f);
+            offset = Vector3.RotateTowards(offset, Vector3.up, 0.6f, 0f);
+            offset *= forceOffset;
+            print(offset);
+            _to = _from + offset;
         }
+    }
+
+    private void DrawLine(Vector3 origin, Vector3 direction)
+    {
+        int count = (int)(_duration / _step);
+        Vector3[] positions = new Vector3[count];
+        _line.positionCount = count;
+        Vector3 g = Physics.gravity;
+
+        for(int i = 0; i < count; i++)
+        {
+            float t = _step * i;
+            Vector3 position = origin + direction * t + g * Mathf.Pow(t, 2f) / 2f;
+            //print($"{position} = {origin} + {direction} * {t} ({direction * t}) + {g} * {t}^2 ({Mathf.Pow(t, 2f)}) / 2 ({g * Mathf.Pow(t, 2f) / 2f})");
+            positions[i] = position;
+        }
+
+        _line.SetPositions(positions);
     }
 
     private void Select()
@@ -59,7 +83,7 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private void Cast()
     {
         if (Target != null)
-            Target.Cast(_direction);
+            Target.Cast(_direction * 50f);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -82,7 +106,7 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         UpdatePositions();
 
-        _direction = _to - _from;
+        _direction = (_to - _from) * _castVelocity;
 
         if (Target != null)
         {

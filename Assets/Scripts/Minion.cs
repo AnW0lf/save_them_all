@@ -7,6 +7,9 @@ public class Minion : MonoBehaviour
 {
     [Header("Ragdoll data")]
     [SerializeField] private Animator _animator = null;
+    [SerializeField] private Rigidbody _body = null;
+
+    public Vector3 BodyOrigin => _body.transform.position;
 
     public bool IsRagdollActive
     {
@@ -48,7 +51,7 @@ public class Minion : MonoBehaviour
     {
         IsRagdollActive = false;
         _agent.Warp(transform.position);
-        _animator.SetFloat("Offset", Random.Range(0f, 1f)) ;
+        _animator.SetFloat("Offset", Random.Range(0f, 1f));
 
         StartCoroutine(Utils.CrossFading(Vector3.zero, Vector3.zero, 1f, (vector) => transform.eulerAngles = vector, (a, b, c) => Vector3.Lerp(a, b, c)));
     }
@@ -66,8 +69,7 @@ public class Minion : MonoBehaviour
     public void Cast(Vector3 direction)
     {
         IsRagdollActive = true;
-
         foreach (var rb in GetComponentsInChildren<Rigidbody>())
-            rb.AddForce(direction * 100f, ForceMode.Acceleration);
+            rb.AddForce(direction, ForceMode.Acceleration);
     }
 }
