@@ -70,6 +70,7 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         foreach (var minion in FindObjectsOfType<Minion>())
         {
             if (minion.IsRagdollActive) continue;
+            if (minion.Target == null) continue;
             if (Target == null || minion.transform.position.z > Target.transform.position.z)
                 Target = minion;
         }

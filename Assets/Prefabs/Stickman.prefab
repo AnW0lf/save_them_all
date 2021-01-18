@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3598718299446778054}
   - component: {fileID: 7135378718644344239}
   - component: {fileID: 5684874076329323486}
+  - component: {fileID: 4886884086574981866}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Player
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 7135378718644344239}
   _body: {fileID: 2679697034542397001}
+  _untargetRigidbody: {fileID: 0}
   _agent: {fileID: 5684874076329323486}
   _renderer: {fileID: 7135378718648462191}
   _untargetMaterial: {fileID: 2100000, guid: 8aaac7a339bde3d448360afbd1120ea0, type: 2}
@@ -95,6 +97,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &4886884086574981866
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135378718636959233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7135378718636959235
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +161,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e81cd194bad1d0d4da7d3153de39f3b0, type: 2}
+  - {fileID: 2100000, guid: 8aaac7a339bde3d448360afbd1120ea0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

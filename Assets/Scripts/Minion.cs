@@ -22,7 +22,15 @@ public class Minion : MonoBehaviour
                 rigidbody.isKinematic = _animator.enabled;
             _agent.enabled = _animator.enabled;
 
-            _renderer.material = IsRagdollActive ? _deathMaterial : _aliveMaterial;
+            if (IsRagdollActive)
+                _renderer.material = _deathMaterial;
+            else
+            {
+                if (Target == null)
+                    _renderer.material = _untargetMaterial;
+                else
+                    _renderer.material = _aliveMaterial;
+            }
         }
     }
 
@@ -33,7 +41,20 @@ public class Minion : MonoBehaviour
         set
         {
             _selected = value;
-            _renderer.material = _selected ? _deathMaterial : _aliveMaterial;
+            if (Selected)
+                _renderer.material = _deathMaterial;
+            else
+            {
+                if (IsRagdollActive)
+                    _renderer.material = _deathMaterial;
+                else
+                {
+                    if (Target == null)
+                        _renderer.material = _untargetMaterial;
+                    else
+                        _renderer.material = _aliveMaterial;
+                }
+            }
         }
     }
 
@@ -102,14 +123,18 @@ public class Minion : MonoBehaviour
             if (IsRagdollActive) ;
             else IsRagdollActive = true;
         }
+    }
 
-        ChectToAddToParty(collision.gameObject);
+    private void OnTriggerEnter(Collider other)
+    {
+        ChectToAddToParty(other.gameObject);
     }
 
     public void ChectToAddToParty(GameObject obj)
     {
         if (obj.TryGetComponent(out MinionHead head))
         {
+            if (head.Minion == this) return;
             if (head.Minion.Target == null)
             {
                 AddToParty(head.Minion);
@@ -117,13 +142,15 @@ public class Minion : MonoBehaviour
         }
         else if (obj.TryGetComponent(out MinionPart part))
         {
+            if (part.Minion == this) return;
             if (part.Minion.Target == null)
             {
-                AddToParty(head.Minion);
+                AddToParty(part.Minion);
             }
         }
         else if (obj.TryGetComponent(out Minion minion))
         {
+            if (minion == this) return;
             if (minion.Target == null)
             {
                 AddToParty(minion);
@@ -137,9 +164,9 @@ public class Minion : MonoBehaviour
         if (minion.Target != null) return;
 
         Transform t = Target;
-        while(t != null)
+        while (t != null)
         {
-            if(t.TryGetComponent(out Points points))
+            if (t.TryGetComponent(out Points points))
             {
                 points.AttachMinion(minion);
                 return;
