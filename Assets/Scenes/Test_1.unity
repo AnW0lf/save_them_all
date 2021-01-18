@@ -4857,6 +4857,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveThing
       objectReference: {fileID: 0}
+    - target: {fileID: 8188094411647423251, guid: e2c4c509eee6d4246ab2c6b9aaec7844,
+        type: 3}
+      propertyPath: _range
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8188094411647423251, guid: e2c4c509eee6d4246ab2c6b9aaec7844,
+        type: 3}
+      propertyPath: _effectPrefab
+      value: 
+      objectReference: {fileID: 1892078723244562, guid: 7e932d8713892bc4c91f6d1e2e0e8cbc,
+        type: 3}
+    - target: {fileID: 8188094411647423251, guid: e2c4c509eee6d4246ab2c6b9aaec7844,
+        type: 3}
+      propertyPath: _explosionForce
+      value: 5000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c4c509eee6d4246ab2c6b9aaec7844, type: 3}
 --- !u!1 &1915013968
