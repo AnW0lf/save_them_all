@@ -98,7 +98,7 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         _holded = true;
         _line.enabled = true;
 
-        CrossFadeTimeScale(0.1f);
+        CrossFadeTimeScale(0.15f);
 
         _down = Input.mousePosition;
 

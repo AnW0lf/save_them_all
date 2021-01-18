@@ -126,6 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _range: 5
-  _explosionForce: 10000
-  _effectPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56,
+  _explosionForce: 5000
+  _effectPrefab: {fileID: 1892078723244562, guid: 7e932d8713892bc4c91f6d1e2e0e8cbc,
     type: 3}
