@@ -72,4 +72,16 @@ public class Minion : MonoBehaviour
         foreach (var rb in GetComponentsInChildren<Rigidbody>())
             rb.AddForce(direction, ForceMode.Acceleration);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print($"Minion detected collision");
+        if (collision.gameObject.TryGetComponent(out Wall wall))
+        {
+            wall.DestroyWall();
+
+            if (IsRagdollActive) ;
+            else IsRagdollActive = true;
+        }
+    }
 }

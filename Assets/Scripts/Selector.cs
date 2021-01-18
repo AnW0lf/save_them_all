@@ -43,7 +43,6 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Vector3 offset = Vector3.RotateTowards(Target.transform.forward, Mathf.Sign(horizontalOffset) * Target.transform.right, Mathf.Abs(horizontalOffset), 0f);
             offset = Vector3.RotateTowards(offset, Vector3.up, 0.6f, 0f);
             offset *= forceOffset;
-            print(offset);
             _to = _from + offset;
         }
     }
@@ -59,7 +58,6 @@ public class Selector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             float t = _step * i;
             Vector3 position = origin + direction * t + g * Mathf.Pow(t, 2f) / 2f;
-            //print($"{position} = {origin} + {direction} * {t} ({direction * t}) + {g} * {t}^2 ({Mathf.Pow(t, 2f)}) / 2 ({g * Mathf.Pow(t, 2f) / 2f})");
             positions[i] = position;
         }
 
