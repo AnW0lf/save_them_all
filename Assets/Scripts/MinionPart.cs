@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinionHead : MonoBehaviour
+public class MinionPart : MonoBehaviour
 {
     [SerializeField] private Minion _minion = null;
 
@@ -10,13 +10,8 @@ public class MinionHead : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Interactive interactive))
         {
-            print("Head");
+            print("Part");
             interactive.Interact();
-            if (_minion.IsRagdollActive) ;
-            else _minion.IsRagdollActive = true;
-        }
-        else if (collision.gameObject.tag == "KillZone")
-        {
             if (_minion.IsRagdollActive) ;
             else _minion.IsRagdollActive = true;
         }

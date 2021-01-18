@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df567049a717f3d4db36b39fd48dbbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _range: 2
-  _explosionForce: 100
+  _range: 5
+  _explosionForce: 10000
   _effectPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56,
     type: 3}

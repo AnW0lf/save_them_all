@@ -7,9 +7,16 @@ public class Wall : Interactive
     [SerializeField] private GameObject _destroyedWallPrefab = null;
     [SerializeField] private Renderer _renderer = null;
 
+    private bool _deactive = false;
+
     public override void Interact()
     {
-        Transform destroyedWall = Instantiate(_destroyedWallPrefab, transform.parent).transform;
+        if (_deactive) return;
+        _deactive = true;
+
+        print("Destroy wall");
+
+        Transform destroyedWall = Instantiate(_destroyedWallPrefab).transform;
         destroyedWall.position = transform.position;
         destroyedWall.rotation = transform.rotation;
 

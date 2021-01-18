@@ -75,6 +75,7 @@ public class Minion : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        print("Minion");
         if (collision.gameObject.TryGetComponent(out Interactive interactive))
         {
             interactive.Interact();
