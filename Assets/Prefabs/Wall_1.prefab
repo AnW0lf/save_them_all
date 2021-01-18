@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8874843355681419390}
   m_Layer: 0
   m_Name: Wall_1
-  m_TagString: Wall
+  m_TagString: KillZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyedWallPrefab: {fileID: 3646623249986195750, guid: 8110c12691a86d44cb3f550fb4195707,
     type: 3}
+  _renderer: {fileID: 6096333828945745946}
 --- !u!54 &8874843355681419390
 Rigidbody:
   m_ObjectHideFlags: 0

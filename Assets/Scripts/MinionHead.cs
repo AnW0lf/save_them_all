@@ -8,13 +8,10 @@ public class MinionHead : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print($"Head detected collision");
-        if(collision.gameObject.TryGetComponent(out Wall wall) || collision.gameObject.tag == "Wall")
+        if(collision.gameObject.tag == "KillZone")
         {
             if (_minion.IsRagdollActive) ;
             else _minion.IsRagdollActive = true;
-
-            wall.DestroyWall();
         }
     }
 }

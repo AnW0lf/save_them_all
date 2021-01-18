@@ -76,9 +76,9 @@ public class Minion : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         print($"Minion detected collision");
-        if (collision.gameObject.TryGetComponent(out Wall wall))
+        if (collision.gameObject.TryGetComponent(out Interactive interactive))
         {
-            wall.DestroyWall();
+            interactive.Interact();
 
             if (IsRagdollActive) ;
             else IsRagdollActive = true;
