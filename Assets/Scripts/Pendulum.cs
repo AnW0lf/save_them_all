@@ -6,10 +6,11 @@ public class Pendulum : Interactive
 {
     [Header("Components")]
     [SerializeField] private bool _active = true;
-    [SerializeField] private Transform _rotor = null;
+    [SerializeField] private Collider _rotor = null;
     [SerializeField] private GameObject _log = null;
     [SerializeField] private GameObject[] _logParts = null;
     [SerializeField] private Rigidbody _blade = null;
+    [SerializeField] private Rigidbody _pendulum = null;
 
     [Space(20)]
     [Header("Ostillation data")]
@@ -35,6 +36,8 @@ public class Pendulum : Interactive
         foreach (var part in _logParts)
             part.SetActive(true);
         _blade.isKinematic = false;
+        _rotor.enabled = false;
+        _pendulum.Sleep();
     }
 
     private void FixedUpdate()
@@ -42,9 +45,9 @@ public class Pendulum : Interactive
         if (Active)
         {
             _counter += Time.fixedDeltaTime;
-            Vector3 eulerAngles = _rotor.localEulerAngles;
+            Vector3 eulerAngles = _rotor.transform.localEulerAngles;
             eulerAngles.z = Mathf.Sin(_omega * _counter + _phi) * _maxOffset;
-            _rotor.localEulerAngles = eulerAngles;
+            _rotor.transform.localEulerAngles = eulerAngles;
         }
     }
 }

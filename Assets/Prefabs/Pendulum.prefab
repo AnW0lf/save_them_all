@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _active: 1
-  _rotor: {fileID: 5692172431947071416}
+  _rotor: {fileID: 8322680349173625610}
   _log: {fileID: 4579536406833289023}
   _logParts:
   - {fileID: 361523973036333302}
@@ -280,8 +280,9 @@ MonoBehaviour:
   - {fileID: 3885092936623714559}
   - {fileID: 740782230332724365}
   _blade: {fileID: 287224788494122193}
-  _omega: 0.25
-  _phi: 0
+  _pendulum: {fileID: 2593036552364327451}
+  _omega: 1
+  _phi: 1.25
   _maxOffset: 60
 --- !u!54 &2593036552364327451
 Rigidbody:
