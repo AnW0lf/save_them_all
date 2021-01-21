@@ -622,16 +622,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pendulum
       objectReference: {fileID: 0}
-    - target: {fileID: 3682221272153303741, guid: edfdec1616a8adb4a9f949203f4acb85,
-        type: 3}
-      propertyPath: _phi
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3682221272153303741, guid: edfdec1616a8adb4a9f949203f4acb85,
-        type: 3}
-      propertyPath: _omega
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3744706119412521234, guid: edfdec1616a8adb4a9f949203f4acb85,
         type: 3}
       propertyPath: m_RootOrder
