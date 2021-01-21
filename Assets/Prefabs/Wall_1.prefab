@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3086291384867784023}
   - component: {fileID: 6096333828945745946}
   - component: {fileID: 4395042333974517250}
+  - component: {fileID: 2223610078251302947}
   - component: {fileID: 6738654153040146363}
   - component: {fileID: 8874843355681419390}
   m_Layer: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3646623249986195750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 0.1}
+  m_LocalScale: {x: 1, y: 4, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,6 +98,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2223610078251302947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646623249986195750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef24cca412b95c49b9ff4cc97a53566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cutCascades: 5
+  _explodeForce: 1
 --- !u!114 &6738654153040146363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,9 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c3c2f31b6bb064b9b8bac3b0fe3d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyedWallPrefab: {fileID: 3646623249986195750, guid: 8110c12691a86d44cb3f550fb4195707,
-    type: 3}
-  _renderer: {fileID: 6096333828945745946}
+  _meshDestroy: {fileID: 2223610078251302947}
 --- !u!54 &8874843355681419390
 Rigidbody:
   m_ObjectHideFlags: 0
