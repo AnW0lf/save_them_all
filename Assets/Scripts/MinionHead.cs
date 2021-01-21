@@ -10,6 +10,7 @@ public class MinionHead : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        print("Head begin");
         if (collision.gameObject.TryGetComponent(out Interactive interactive))
         {
             print("Head");
@@ -19,6 +20,7 @@ public class MinionHead : MonoBehaviour
         }
         else if (collision.gameObject.tag == "KillZone")
         {
+            print("Head");
             if (_minion.IsRagdollActive) ;
             else _minion.IsRagdollActive = true;
         }
