@@ -39,12 +39,16 @@ public class Enemy : Interactive
 
     public Transform Target { get; set; } = null;
 
+    private bool _destroyed = false;
     public override void Interact()
     {
+        if (_destroyed) return;
+        _destroyed = true;
+
         IsRagdollActive = true;
         foreach (var enemyPart in GetComponentsInChildren<EnemyPart>())
-            Destroy(enemyPart, 0.1f);
-        Destroy(this);
+            Destroy(enemyPart, 0.8f);
+        Destroy(this, 0.8f);
     }
 
     private void Start()
@@ -76,7 +80,7 @@ public class Enemy : Interactive
             if (Vector3.Distance(transform.position, Target.position) < _castDistance)
             {
                 Vector3 direction = (Target.position - transform.position).normalized + Vector3.up * 0.5f;
-                direction *= 15f;
+                direction *= 400f;
                 Cast(direction);
             }
         }
