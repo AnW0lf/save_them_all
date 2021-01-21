@@ -49,11 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7135378718644344239}
-  _body: {fileID: 2679697034542397001}
   _agent: {fileID: 5684874076329323486}
   _renderer: {fileID: 7135378718648462191}
   _untargetMaterial: {fileID: 2100000, guid: 8aaac7a339bde3d448360afbd1120ea0, type: 2}
   _aliveMaterial: {fileID: 2100000, guid: e81cd194bad1d0d4da7d3153de39f3b0, type: 2}
+  _selectedMaterial: {fileID: -9103484930961366303, guid: 55534b674e1ad4e9988d9be64c8ed52a,
+    type: 3}
+  _castedMaterial: {fileID: 2100000, guid: c22ff6e5c9f8b4657806a92e2de34fd9, type: 2}
   _deathMaterial: {fileID: 2100000, guid: 7b43a19f99847f94f8e4ab851c1cb07c, type: 2}
 --- !u!95 &7135378718644344239
 Animator:

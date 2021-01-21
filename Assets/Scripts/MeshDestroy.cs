@@ -278,7 +278,7 @@ public class MeshDestroy : MonoBehaviour
             collider.convex = true;
 
             var rigidbody = GameObject.AddComponent<Rigidbody>();
-            rigidbody.mass = 5f;
+            rigidbody.mass = 1f;
 
             //var meshDestroy = GameObject.AddComponent<MeshDestroy>();
             //meshDestroy._cutCascades = original._cutCascades;

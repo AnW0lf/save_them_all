@@ -14,8 +14,9 @@ public class MinionPart : MonoBehaviour
         {
             print("Part");
             interactive.Interact();
-            if (_minion.IsRagdollActive) ;
-            else _minion.IsRagdollActive = true;
+
+            if (!_minion.IsRagdollActive) _minion.IsRagdollActive = true;
+            if (!_minion.IsDeath) _minion.IsDeath = true;
         }
 
         Minion.ChectToAddToParty(collision.gameObject);

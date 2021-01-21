@@ -7,9 +7,6 @@ public class Minion : MonoBehaviour
 {
     [Header("Ragdoll data")]
     [SerializeField] private Animator _animator = null;
-    [SerializeField] private Rigidbody _body = null;
-
-    public Vector3 BodyOrigin => _body.transform.position;
 
     public bool IsRagdollActive
     {
@@ -22,15 +19,7 @@ public class Minion : MonoBehaviour
                 rigidbody.isKinematic = _animator.enabled;
             _agent.enabled = _animator.enabled;
 
-            if (IsRagdollActive)
-                _renderer.material = _deathMaterial;
-            else
-            {
-                if (Target == null)
-                    _renderer.material = _untargetMaterial;
-                else
-                    _renderer.material = _aliveMaterial;
-            }
+            UpdateMaterial();
         }
     }
 
@@ -41,31 +30,20 @@ public class Minion : MonoBehaviour
         set
         {
             _selected = value;
-            if (Selected)
-                _renderer.material = _deathMaterial;
-            else
-            {
-                if (IsRagdollActive)
-                    _renderer.material = _deathMaterial;
-                else
-                {
-                    if (Target == null)
-                        _renderer.material = _untargetMaterial;
-                    else
-                        _renderer.material = _aliveMaterial;
-                }
-            }
+            UpdateMaterial();
         }
     }
 
-    [Header("Move data")]
-    [SerializeField] private NavMeshAgent _agent = null;
-    [SerializeField] private Renderer _renderer = null;
-    [SerializeField] private Material _untargetMaterial = null;
-    [SerializeField] private Material _aliveMaterial = null;
-    [SerializeField] private Material _deathMaterial = null;
-
-    public void SetDestination(Vector3 target) => _agent.SetDestination(target);
+    private bool _isDeath = false;
+    public bool IsDeath
+    {
+        get => _isDeath;
+        set
+        {
+            _isDeath = value;
+            UpdateMaterial();
+        }
+    }
 
     private Transform _target = null;
     public Transform Target
@@ -74,17 +52,41 @@ public class Minion : MonoBehaviour
         set
         {
             _target = value;
-            if (_target == null)
-            {
-                _renderer.material = _untargetMaterial;
-            }
+            UpdateMaterial();
+        }
+    }
+
+    [Header("Move data")]
+    [SerializeField] private NavMeshAgent _agent = null;
+    [SerializeField] private Renderer _renderer = null;
+    [SerializeField] private Material _untargetMaterial = null;
+    [SerializeField] private Material _aliveMaterial = null;
+    [SerializeField] private Material _selectedMaterial = null;
+    [SerializeField] private Material _castedMaterial = null;
+    [SerializeField] private Material _deathMaterial = null;
+
+    public void SetDestination(Vector3 target) => _agent.SetDestination(target);
+
+    private void UpdateMaterial()
+    {
+        if(Target == null)
+        {
+            if (IsDeath)
+                _renderer.material = _deathMaterial;
             else
-            {
-                if (IsRagdollActive)
-                    _renderer.material = _deathMaterial;
-                else
-                    _renderer.material = _aliveMaterial;
-            }
+                _renderer.material = _untargetMaterial;
+        }
+        else
+        {
+            if (IsDeath)
+                _renderer.material = _deathMaterial;
+            else if (IsRagdollActive)
+                _renderer.material = _castedMaterial;
+            else if (Selected)
+                _renderer.material = _selectedMaterial;
+            else
+                _renderer.material = _aliveMaterial;
+
         }
     }
 
@@ -120,8 +122,8 @@ public class Minion : MonoBehaviour
         {
             interactive.Interact();
 
-            if (IsRagdollActive) ;
-            else IsRagdollActive = true;
+            if (!IsRagdollActive) IsRagdollActive = true;
+            if (!IsDeath) IsDeath = true;
         }
     }
 
