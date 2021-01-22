@@ -6,6 +6,8 @@ public class Point : MonoBehaviour
 {
     private Minion _minion = null;
 
+    public Minion Minion => _minion;
+
     public void AttachMinion(Minion minion)
     {
         _minion = minion;
@@ -18,5 +20,10 @@ public class Point : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(transform.position, 0.1f);
+    }
+
+    public void Clear()
+    {
+        _minion = null;
     }
 }
