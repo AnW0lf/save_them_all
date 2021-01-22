@@ -43,15 +43,9 @@ public class MeshDestroy : MonoBehaviour
                 float angle = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
                 Vector3 circle = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
                 Vector3 forward = Vector3.forward * (UnityEngine.Random.Range(0, 2) == 1 ? -1 : 1);
-                Vector3 inNormal = Vector3.RotateTowards(circle, forward, UnityEngine.Random.Range(0f, 0.3f), 0f);
+                Vector3 inNormal = Vector3.RotateTowards(circle, forward, UnityEngine.Random.Range(0f, 0.1f), 0f);
 
-                float xOffset = (bounds.max.x - bounds.min.x) * 0.25f;
-                float yOffset = (bounds.max.y - bounds.min.y) * 0.25f;
-                float zOffset = (bounds.max.z - bounds.min.z) * 0.25f;
-
-                var plane = new Plane(inNormal, new Vector3(UnityEngine.Random.Range(bounds.min.x + xOffset, bounds.max.x - xOffset),
-                                                            UnityEngine.Random.Range(bounds.min.y + yOffset, bounds.max.y - yOffset),
-                                                            UnityEngine.Random.Range(bounds.min.z + zOffset, bounds.max.z - zOffset)));
+                var plane = new Plane(inNormal, bounds.center);
 
 
                 subParts.Add(GenerateMesh(parts[i], plane, true));
