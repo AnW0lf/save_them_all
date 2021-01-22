@@ -11,7 +11,7 @@ public class Points : MonoBehaviour
     {
         count = Mathf.Clamp(count, 0, _points.Length);
 
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             Minion minion = Instantiate(_minionPrefab).GetComponent<Minion>();
             minion.transform.position = _points[i].transform.position + Vector3.back * 0.9f;
@@ -23,10 +23,21 @@ public class Points : MonoBehaviour
     {
         foreach (var point in _points)
         {
-            if(point.IsEmpty)
+            if (point.IsEmpty)
             {
                 point.AttachMinion(minion);
                 return;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        foreach (var point in _points)
+        {
+            if (!point.IsEmpty && point.Minion.IsRagdollActive)
+            {
+                point.Clear();
             }
         }
     }
