@@ -35,6 +35,24 @@ public class Enemy : Interactive
     [SerializeField] private float _castDistance = 5f;
     [SerializeField] private float _moveDistance = 15f;
 
+    [Header("Alert")]
+    [SerializeField] private Transform _icon = null;
+    private Coroutine _scalingIcon = null;
+    private bool _isAlert = false;
+    public bool IsAlert
+    {
+        get => _isAlert;
+        set
+        {
+            _isAlert = value;
+            if (_scalingIcon != null) StopCoroutine(_scalingIcon);
+            Vector3 from = _icon.localScale;
+            Vector3 to = _isAlert ? Vector3.one : Vector3.zero;
+            _scalingIcon = StartCoroutine(Utils.CrossFading(from, to, 0.2f, (a) => _icon.localScale = a, (a, b, c) => Vector3.Lerp(a, b, c)));
+        }
+    }
+
+
     public void SetDestination(Vector3 target) => _agent.SetDestination(target);
 
     public Transform Target { get; set; } = null;
@@ -64,6 +82,7 @@ public class Enemy : Interactive
         {
             if (Target == null)
             {
+                if (IsAlert) IsAlert = false;
                 foreach (var minion in FindObjectsOfType<Minion>()
                     .Where((m) => m.Target != null && !m.IsRagdollActive
                     && Vector3.Distance(transform.position, m.transform.position) < _moveDistance))
@@ -74,6 +93,7 @@ public class Enemy : Interactive
             }
             else
             {
+                if (!IsAlert) IsAlert = true;
                 SetDestination(Target.position);
             }
 
@@ -84,6 +104,7 @@ public class Enemy : Interactive
                 Cast(direction);
             }
         }
+        else if (IsAlert) IsAlert = false;
 
         _animator.SetFloat("Speed", _agent.velocity.magnitude);
     }
